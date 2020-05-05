@@ -54,7 +54,7 @@ namespace Task03
     {
         static void Main(string[] args)
         {
-            int N
+            int N;
             List<ComputerInfo> computerInfoList = new List<ComputerInfo>();
             try
             {

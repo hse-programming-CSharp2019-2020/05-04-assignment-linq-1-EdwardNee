@@ -38,30 +38,46 @@ namespace Task02
 
         public static void RunTesk02()
         {
-            int[] arr;
+            int[] arr = default;
             try
             {
                 // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
-                arr = 
+                arr = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse)
+                    .ToArray();
             }
-            
-            
-            var filteredCollection = arr.
-           
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("InvalidOperationException");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("FormatException");
+            }
+
+
+            var filteredCollection = arr.;
+            foreach (var VARIABLE in filteredCollection)
+            {
+                Console.WriteLine(VARIABLE.Key);
+            }
+
+            //var grouped = arr.Select((n, i) => new { n, d = n - i }).GroupBy(p => p.d, p => p.n);
+
             try
             {
-                
+
                 // использовать статическую форму вызова метода подсчета среднего
-                double averageUsingStaticForm = 
+                double averageUsingStaticForm =
                 // использовать объектную форму вызова метода подсчета среднего
-                double averageUsingInstanceForm = 
+                double averageUsingInstanceForm =
 
 
                 // вывести элементы коллекции в одну строку
                 filteredCollection.
             }
-          
-        }
-        
+
+
+            }
+
     }
 }

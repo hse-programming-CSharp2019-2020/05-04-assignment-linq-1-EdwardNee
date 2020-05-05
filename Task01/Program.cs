@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,23 +43,43 @@ namespace Task01
 
         public static void RunTesk01()
         {
-            int[] arr;
+            int[] arr = default;
             try
             {
                 // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
-                arr = 
+                arr = (from str in Console.ReadLine()?.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                       select int.Parse(str)).ToArray();
+
+                //Еще можно так.
+                //arr = Console.ReadLine()?.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
             }
-            
+            catch (InvalidOperationException)
+            {   //ничего не введено.
+                Console.WriteLine("InvalidOperationException");
+            }
+            catch (FormatException)
+            {   //Введено не число.
+                Console.WriteLine("FormatException");
+            }
+
             // использовать синтаксис запросов!
-            IEnumerable<int> arrQuery = from 
+            IEnumerable<int> arrQuery = from el in arr
+                                        where el % 2 == 0 | el < 0
+                                        select el;
+            //IEnumerable<int> arrQuery = arr.Where(x => x % 2 == 0);
 
             // использовать синтаксис методов!
-            IEnumerable<int> arrMethod = arr.
+            IEnumerable<int> arrMethod = arr.Where(x => x % 2 == 0 | x < 0);
 
             try
             {
                 PrintEnumerableCollection<int>(arrQuery, ":");
+                Console.WriteLine();
                 PrintEnumerableCollection<int>(arrMethod, "*");
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("InvalidOperationException");
             }
         }
 
@@ -65,8 +87,10 @@ namespace Task01
         // P.S. Есть два способа, оставьте тот, в котором применяется LINQ...
         public static void PrintEnumerableCollection<T>(IEnumerable<T> collection, string separator)
         {
-           
-           
+            foreach (var c in collection)
+            {
+                Console.Write($"{c}{separator}");
+            }
         }
     }
 }
