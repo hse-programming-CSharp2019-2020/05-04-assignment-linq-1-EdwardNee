@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 /*
  * На вход подается строка, состоящая из целых чисел типа int, разделенных одним или несколькими пробелами.
@@ -39,30 +40,44 @@ namespace Task04
 
         public static void RunTesk04()
         {
-            int[] arr;
+            int[] arr = default;
             try
             {
                 // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
-                arr = 
+                arr = (Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)).Select(int.Parse).ToArray();
             }
-           
-                // использовать синтаксис методов! SQL-подобные запросы не писать!
-               
-                int arrAggregate = arr.
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("InvalidOperationException");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("FormatException");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("ArgumentOutOfRangeException");
+            }
 
-                int arrMyAggregate = MyClass.MyAggregate(arr);
 
-                Console.WriteLine(arrAggregate);
-                Console.WriteLine(arrMyAggregate);
-           
+            // использовать синтаксис методов! SQL-подобные запросы не писать!
+
+            int arrAggregate = arr.Aggregate(5, (cur, nex) => cur + nex);
+            Console.WriteLine(arrAggregate);
+
+            //    int arrMyAggregate = MyClass.MyAggregate(arr);
+
+            //Console.WriteLine(arrAggregate);
+            //Console.WriteLine(arrMyAggregate);
+
         }
     }
 
-    static class MyClass
-    {
-        public static int MyAggregate()
-        {
-            
-        }
-    }
+    //static class MyClass
+    //{
+    //    public static int MyAggregate()
+    //    {
+
+    //    }
+    //}
 }

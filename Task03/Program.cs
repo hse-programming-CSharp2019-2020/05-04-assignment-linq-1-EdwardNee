@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 /*Все действия по обработке данных выполнять с использованием LINQ
  * 
@@ -50,6 +51,10 @@ using System.Linq;
  */
 namespace Task03
 {
+    public enum Manufacturer
+    {
+        Dell = 0, Asus = 1, Apple = 2, Microsoft = 3
+    }
     class Program
     {
         static void Main(string[] args)
@@ -58,17 +63,37 @@ namespace Task03
             List<ComputerInfo> computerInfoList = new List<ComputerInfo>();
             try
             {
-                N = 
-                
+                N = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+
                 for (int i = 0; i < N; i++)
                 {
-                    
+                    var info = Console.ReadLine().Split(' ');
+                    computerInfoList.Add(new ComputerInfo
+                    {
+                        Owner = info[0],
+                        ComputerManufacturer = (Manufacturer)Enum.Parse(typeof(Manufacturer), info[1])
+                    });
                 }
             }
-           
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("InvalidOperationException");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("FormatException");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("ArgumentOutOfRangeException");
+            }
+
 
             // выполните сортировку одним выражением
-            var computerInfoQuery = from 
+            var computerInfoQuery =
+
+
+
 
             PrintCollectionInOneLine(computerInfoQuery);
 
@@ -78,7 +103,7 @@ namespace Task03
             var computerInfoMethods = computerInfoList.
 
             PrintCollectionInOneLine(computerInfoMethods);
-            
+
         }
 
         // выведите элементы коллекции на экран с помощью кода, состоящего из одной линии (должна быть одна точка с запятой)
@@ -92,6 +117,6 @@ namespace Task03
     {
         public string Owner { get; set; }
         public Manufacturer ComputerManufacturer { get; set; }
-        
+
     }
 }

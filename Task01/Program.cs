@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -81,16 +82,19 @@ namespace Task01
             {
                 Console.WriteLine("InvalidOperationException");
             }
+
+
         }
 
         // Попробуйте осуществить вывод элементов коллекции с учетом разделителя, записав это ОДНИМ ВЫРАЖЕНИЕМ.
         // P.S. Есть два способа, оставьте тот, в котором применяется LINQ...
         public static void PrintEnumerableCollection<T>(IEnumerable<T> collection, string separator)
         {
-            foreach (var c in collection)
-            {
-                Console.Write($"{c}{separator}");
-            }
+            //Console.WriteLine(string.Join(separator, collection));
+
+            var res = collection.Select(x => x.ToString()).Aggregate((current, next) => current + separator + next);
+            // var res = collection.OfType<string>().Aggregate((current, next) => current + separator + next);
+            Console.WriteLine(res);
         }
     }
 }

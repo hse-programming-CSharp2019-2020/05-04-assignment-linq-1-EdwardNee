@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 
+
 /* В задаче не использовать циклы for, while. Все действия по обработке данных выполнять с использованием LINQ
  * 
  * На вход подается строка, состоящая из целых чисел типа int, разделенных одним или несколькими пробелами.
@@ -55,29 +56,36 @@ namespace Task02
             }
 
 
-            var filteredCollection = arr.;
+            var filteredCollection = arr.TakeWhile(x => x != 0);
             foreach (var VARIABLE in filteredCollection)
             {
-                Console.WriteLine(VARIABLE.Key);
+                Console.WriteLine(VARIABLE);
             }
 
-            //var grouped = arr.Select((n, i) => new { n, d = n - i }).GroupBy(p => p.d, p => p.n);
 
             try
             {
 
                 // использовать статическую форму вызова метода подсчета среднего
-                double averageUsingStaticForm =
+                double averageUsingStaticForm = System.Linq.Enumerable.Average(filteredCollection);
                 // использовать объектную форму вызова метода подсчета среднего
-                double averageUsingInstanceForm =
+                double averageUsingInstanceForm = filteredCollection.Average();
 
 
-                // вывести элементы коллекции в одну строку
-                filteredCollection.
+                    // вывести элементы коллекции в одну строку
+                    filteredCollection.
+                    
+
             }
-
-
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("InvalidOperationException");
             }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("ArgumentNullException");
+            }
+        }
 
     }
 }
