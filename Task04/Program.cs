@@ -65,19 +65,19 @@ namespace Task04
             int arrAggregate = arr.Aggregate(5, (cur, nex) => cur + nex);
             Console.WriteLine(arrAggregate);
 
-            //    int arrMyAggregate = MyClass.MyAggregate(arr);
+            int arrMyAggregate = MyClass.MyAggregate(arr);
 
-            //Console.WriteLine(arrAggregate);
-            //Console.WriteLine(arrMyAggregate);
+            Console.WriteLine(arrAggregate);
+            Console.WriteLine(arrMyAggregate);
 
         }
     }
 
-    //static class MyClass
-    //{
-    //    public static int MyAggregate()
-    //    {
+    static class MyClass
+    {
+        public static int MyAggregate()
+        {
 
-    //    }
-    //}
+        }
+    }
 }

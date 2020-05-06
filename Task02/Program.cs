@@ -58,19 +58,20 @@ namespace Task02
 
 
             var filteredCollection = arr.TakeWhile(x => x != 0);
-           
+
 
             try
             {
                 // использовать статическую форму вызова метода подсчета среднего
                 double averageUsingStaticForm = Enumerable.Average(filteredCollection, x => x * x);
                 // использовать объектную форму вызова метода подсчета среднего
-                double averageUsingInstanceForm = filteredCollection.Average(x=>x*x);
+                double averageUsingInstanceForm = filteredCollection.Average(x => x * x);
                 Console.WriteLine($"{averageUsingStaticForm:F3}\n{averageUsingInstanceForm:F3}");
 
-                    // вывести элементы коллекции в одну строку
-                    filteredCollection.ToList().ForEach(x=>Console.Write($"{x} "));
-                    //var s = filteredCollection.Aggregate((c, n) => ();
+                // вывести элементы коллекции в одну строку
+                //filteredCollection.ToList().ForEach(x=>Console.Write($"{x} "));
+                string s = filteredCollection.Select(x => x.ToString()).Aggregate((x, y) => x + " " + y).ToString();
+                Console.WriteLine(s);
             }
             catch (InvalidOperationException)
             {

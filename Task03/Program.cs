@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 
 /*Все действия по обработке данных выполнять с использованием LINQ
  * 
@@ -71,7 +72,8 @@ namespace Task03
                     computerInfoList.Add(new ComputerInfo
                     {
                         Owner = info[0],
-                        ComputerManufacturer = (Manufacturer)Enum.Parse(typeof(Manufacturer), info[1])
+                        Date = int.Parse(info[1]),
+                        ComputerManufacturer = (Manufacturer)Enum.Parse(typeof(Manufacturer), info[2])                        
                     });
                 }
             }
@@ -87,20 +89,26 @@ namespace Task03
             {
                 Console.WriteLine("ArgumentOutOfRangeException");
             }
-
+            catch (ArgumentException)
+            {
+                Console.WriteLine("ArgumentException");
+            }
 
             // выполните сортировку одним выражением
-            var computerInfoQuery =
+            var computerInfoQuery = from ci in computerInfoList
+                                    orderby ci.Owner descending, ci.ComputerManufacturer descending , ci.Date
+                                    select ci;
 
 
-
+            
 
             PrintCollectionInOneLine(computerInfoQuery);
 
             Console.WriteLine();
 
             // выполните сортировку одним выражением
-            var computerInfoMethods = computerInfoList.
+            var computerInfoMethods = computerInfoList.OrderByDescending(ci => ci.Owner)
+                .ThenByDescending(ci => ci.ComputerManufacturer.ToString()).ThenBy(ci => ci.Date);
 
             PrintCollectionInOneLine(computerInfoMethods);
 
@@ -109,12 +117,28 @@ namespace Task03
         // выведите элементы коллекции на экран с помощью кода, состоящего из одной линии (должна быть одна точка с запятой)
         public static void PrintCollectionInOneLine(IEnumerable<ComputerInfo> collection)
         {
+            collection.ToList().ForEach(c=>Console.WriteLine($"{c.Owner}: {c.ComputerManufacturer.ToString()} [{c.Date}]"));
         }
     }
 
 
     class ComputerInfo
     {
+        private int date;
+
+        public int Date
+        {
+            get => date;
+            set
+            {
+                if (value < 1970 | value > 2020)
+                {
+                    throw new ArgumentException();
+                }
+                date = value;
+            }
+        }
+
         public string Owner { get; set; }
         public Manufacturer ComputerManufacturer { get; set; }
 
