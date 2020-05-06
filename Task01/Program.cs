@@ -68,6 +68,14 @@ namespace Task01
             {
                 Console.WriteLine($"OverflowException");
             }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("ArgumentNullException");
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("ArgumentException");
+            }
 
             // использовать синтаксис запросов!
             IEnumerable<int> arrQuery = from el in arr

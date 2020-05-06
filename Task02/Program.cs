@@ -55,22 +55,26 @@ namespace Task02
             {
                 Console.WriteLine("FormatException");
             }
-
-
-            var filteredCollection = arr.TakeWhile(x => x != 0);
-
+            catch (OverflowException)
+            {
+                Console.WriteLine("OverflowException");
+            }
 
             try
             {
+                var filteredCollection = arr.TakeWhile(x => x != 0);
+
+
+
                 // использовать статическую форму вызова метода подсчета среднего
-                double averageUsingStaticForm = Enumerable.Average(filteredCollection, x => x * x);
+                double averageUsingStaticForm = Enumerable.Average(filteredCollection, x => checked(x * x));
                 // использовать объектную форму вызова метода подсчета среднего
-                double averageUsingInstanceForm = filteredCollection.Average(x => x * x);
+                double averageUsingInstanceForm = filteredCollection.Average(x => checked(x * x));
                 Console.WriteLine($"{averageUsingStaticForm:F3}\n{averageUsingInstanceForm:F3}");
 
                 // вывести элементы коллекции в одну строку
                 //filteredCollection.ToList().ForEach(x=>Console.Write($"{x} "));
-                string s = filteredCollection.Select(x => x.ToString()).Aggregate((x, y) => x + " " + y).ToString();
+                string s = filteredCollection.Select(x => x.ToString()).Aggregate((x, y) => x + " " + y).ToString().Replace(".", ",");
                 Console.WriteLine(s);
             }
             catch (InvalidOperationException)
@@ -80,6 +84,10 @@ namespace Task02
             catch (ArgumentNullException)
             {
                 Console.WriteLine("ArgumentNullException");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("OverflowException");
             }
         }
 
