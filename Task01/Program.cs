@@ -76,9 +76,10 @@ namespace Task01
             {
                 Console.WriteLine("ArgumentException");
             }
-
-            // использовать синтаксис запросов!
-            IEnumerable<int> arrQuery = from el in arr
+            try
+            {
+                // использовать синтаксис запросов!
+                IEnumerable<int> arrQuery = from el in arr
                                         where el % 2 == 0 | el < 0
                                         select el;
             //IEnumerable<int> arrQuery = arr.Where(x => x % 2 == 0);
@@ -86,8 +87,7 @@ namespace Task01
             // использовать синтаксис методов!
             IEnumerable<int> arrMethod = arr.Where(x => x % 2 == 0 | x < 0);
 
-            try
-            {
+            
                 PrintEnumerableCollection<int>(arrQuery, ":");
                 PrintEnumerableCollection<int>(arrMethod, "*");
             }

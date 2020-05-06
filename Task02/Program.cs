@@ -70,7 +70,7 @@ namespace Task02
                 double averageUsingStaticForm = Enumerable.Average(filteredCollection, x => checked(x * x));
                 // использовать объектную форму вызова метода подсчета среднего
                 double averageUsingInstanceForm = filteredCollection.Average(x => checked(x * x));
-                Console.WriteLine($"{averageUsingStaticForm:F3}\n{averageUsingInstanceForm:F3}");
+                Console.WriteLine($"{averageUsingStaticForm:F3}\n{averageUsingInstanceForm:F3}".Replace(".",","));
 
                 // вывести элементы коллекции в одну строку
                 //filteredCollection.ToList().ForEach(x=>Console.Write($"{x} "));
