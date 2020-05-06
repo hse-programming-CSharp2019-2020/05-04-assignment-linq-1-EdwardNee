@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 /*Все действия по обработке данных выполнять с использованием LINQ
  * 
@@ -60,6 +61,8 @@ namespace Task03
     {
         static void Main(string[] args)
         {
+            Console.InputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
             int N;
             List<ComputerInfo> computerInfoList = new List<ComputerInfo>();
             try
@@ -73,7 +76,7 @@ namespace Task03
                     {
                         Owner = info[0],
                         Date = int.Parse(info[1]),
-                        ComputerManufacturer = (Manufacturer)Enum.Parse(typeof(Manufacturer), info[2])                        
+                        ComputerManufacturer = (Manufacturer)Enum.Parse(typeof(Manufacturer), info[2])
                     });
                 }
             }
@@ -177,7 +180,19 @@ namespace Task03
         }
 
         public string Owner { get; set; }
-        public Manufacturer ComputerManufacturer { get; set; }
+        private Manufacturer coManufacturer;
+        public Manufacturer ComputerManufacturer
+        {
+            get => coManufacturer;
+            set
+            {
+                if ((int)value > 3 || value < 0)
+                {
+                    throw new ArgumentException();
+                }
+                coManufacturer = value;
+            }
+        }
 
     }
 }
