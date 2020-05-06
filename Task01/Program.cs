@@ -87,6 +87,10 @@ namespace Task01
             {
                 Console.WriteLine("InvalidOperationException");
             }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("ArgumentNullException");
+            }
 
 
         }
