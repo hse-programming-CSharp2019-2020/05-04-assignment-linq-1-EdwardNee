@@ -81,7 +81,6 @@ namespace Task01
             try
             {
                 PrintEnumerableCollection<int>(arrQuery, ":");
-                Console.WriteLine();
                 PrintEnumerableCollection<int>(arrMethod, "*");
             }
             catch (InvalidOperationException)
