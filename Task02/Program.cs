@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 
 /* В задаче не использовать циклы for, while. Все действия по обработке данных выполнять с использованием LINQ
@@ -57,25 +58,19 @@ namespace Task02
 
 
             var filteredCollection = arr.TakeWhile(x => x != 0);
-            foreach (var VARIABLE in filteredCollection)
-            {
-                Console.WriteLine(VARIABLE);
-            }
-
+           
 
             try
             {
-
                 // использовать статическую форму вызова метода подсчета среднего
-                double averageUsingStaticForm = System.Linq.Enumerable.Average(filteredCollection);
+                double averageUsingStaticForm = Enumerable.Average(filteredCollection, x => x * x);
                 // использовать объектную форму вызова метода подсчета среднего
-                double averageUsingInstanceForm = filteredCollection.Average();
-
+                double averageUsingInstanceForm = filteredCollection.Average(x=>x*x);
+                Console.WriteLine($"{averageUsingStaticForm:F3}\n{averageUsingInstanceForm:F3}");
 
                     // вывести элементы коллекции в одну строку
-                    filteredCollection.
-                    
-
+                    filteredCollection.ToList().ForEach(x=>Console.Write($"{x} "));
+                    //var s = filteredCollection.Aggregate((c, n) => ();
             }
             catch (InvalidOperationException)
             {

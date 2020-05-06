@@ -48,19 +48,25 @@ namespace Task01
             try
             {
                 // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
-                arr = (from str in Console.ReadLine()?.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                       select int.Parse(str)).ToArray();
+                arr = (from str in Console.ReadLine()?.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
+                    select int.Parse(str)).ToArray();
 
                 //Еще можно так.
                 //arr = Console.ReadLine()?.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
             }
             catch (InvalidOperationException)
-            {   //ничего не введено.
+            {
+                //ничего не введено.
                 Console.WriteLine("InvalidOperationException");
             }
             catch (FormatException)
-            {   //Введено не число.
+            {
+                //Введено не число.
                 Console.WriteLine("FormatException");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine($"OverflowException");
             }
 
             // использовать синтаксис запросов!
