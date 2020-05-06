@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 /*
  * На вход подается строка, состоящая из целых чисел типа int, разделенных одним или несколькими пробелами.
@@ -40,6 +42,13 @@ namespace Task04
 
         public static void RunTesk04()
         {
+            List<int> values = new List<int> { 3, 1, 0, 5 };
+            int index =
+                values
+                    .Select((n, i) => new { Value = n, Index = i })
+                    .Aggregate((a, b) => a.Value < b.Value ? a : b)
+                    .Index;
+            Console.WriteLine(index);
             int[] arr = default;
             try
             {
@@ -60,10 +69,12 @@ namespace Task04
             }
 
 
+
             // использовать синтаксис методов! SQL-подобные запросы не писать!
 
             int arrAggregate = arr.Aggregate(5, (cur, nex) => cur + nex);
             Console.WriteLine(arrAggregate);
+
 
             int arrMyAggregate = MyClass.MyAggregate(arr);
 
