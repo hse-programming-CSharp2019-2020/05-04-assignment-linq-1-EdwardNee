@@ -77,6 +77,14 @@ namespace Task03
                     });
                 }
             }
+            catch (OverflowException)
+            {
+                Console.WriteLine("OverflowException");
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("ArgumentNullException");
+            }
             catch (InvalidOperationException)
             {
                 Console.WriteLine("InvalidOperationException");
@@ -94,24 +102,53 @@ namespace Task03
                 Console.WriteLine("ArgumentException");
             }
 
-            // выполните сортировку одним выражением
-            var computerInfoQuery = from ci in computerInfoList
-                                    orderby ci.Owner descending, ci.ComputerManufacturer descending , ci.Date
-                                    select ci;
+
+
+            try
+            {
+                // выполните сортировку одним выражением
+                var computerInfoQuery = from ci in computerInfoList
+                    orderby ci.Owner descending, ci.ComputerManufacturer.ToString(), ci.Date descending 
+                    select ci;
 
 
             
 
-            PrintCollectionInOneLine(computerInfoQuery);
+                PrintCollectionInOneLine(computerInfoQuery);
 
-            Console.WriteLine();
+                Console.WriteLine();
 
-            // выполните сортировку одним выражением
-            var computerInfoMethods = computerInfoList.OrderByDescending(ci => ci.Owner)
-                .ThenByDescending(ci => ci.ComputerManufacturer.ToString()).ThenBy(ci => ci.Date);
+                // выполните сортировку одним выражением
+                var computerInfoMethods = computerInfoList.OrderByDescending(ci => ci.Owner)
+                    .ThenBy(ci => ci.ComputerManufacturer.ToString()).ThenByDescending(ci => ci.Date);
 
-            PrintCollectionInOneLine(computerInfoMethods);
+                PrintCollectionInOneLine(computerInfoMethods);
 
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("OverflowException");
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("ArgumentNullException");
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("InvalidOperationException");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("FormatException");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("ArgumentOutOfRangeException");
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("ArgumentException");
+            }
         }
 
         // выведите элементы коллекции на экран с помощью кода, состоящего из одной линии (должна быть одна точка с запятой)
